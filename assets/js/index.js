@@ -1,5 +1,5 @@
 const pokeContainer = document.querySelector('#pokeContainer');
-const pokemonsCount = 150;
+const pokemonsCount = 1010;
 const colors = {
     fire: '#FDDFDF',
     grass: '#DEFDE0',
@@ -59,5 +59,26 @@ const createPokemonCard = (poke) => {
     card.innerHTML = pokemonInnerHTML
     pokeContainer.appendChild(card)
 }
+
+const searchInput = document.querySelector('#searchInput');
+const searchButton = document.querySelector('#searchButton');
+
+searchButton.addEventListener('click', () => {
+    const searchText = searchInput.value.toLowerCase();
+    filterPokemons(searchText);
+});
+
+const filterPokemons = (searchText) => {
+    const allPokemonCards = document.querySelectorAll('.pokemon');
+    
+    allPokemonCards.forEach(card => {
+        const cardText = card.innerText.toLowerCase();
+        if (cardText.includes(searchText)) {
+            card.style.display = 'block';
+        } else {
+            card.style.display = 'none';
+        }
+    });
+};
 
 fetchPokemons()
