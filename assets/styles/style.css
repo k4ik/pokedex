@@ -147,9 +147,16 @@ header button:hover {
         flex-direction: column;
     }
 
+    .title h1 {
+        font-size: 28px;
+    }
+
     .pokeContainer {
         display: grid;
         grid-template-columns: auto;
         justify-content: center;
+    }
+    .pokemon {
+        width: 280px;
     }
 }
