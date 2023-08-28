@@ -4,19 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pokédex</title>
+    <link rel="shortcut icon" href="assets/images/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="assets/styles/style.css">
 </head>
 <body>
     <header>
-        <h1>Pokédex</h1>
+        <div class="title">
+            <h1>Pokédex</h1>
+            <p>by <a href="https://github.com/k4ik/" target="_blank">k4ik</a></p>
+        </div>
         <div>
             <input type="text" id="searchInput" placeholder="Search by ID, name, or type">
             <button id="searchButton">Search</button>
         </div>
     </header>
-    <div class="pokeContainer" id="pokeContainer">
-
-    </div>
+    <div class="pokeContainer" id="pokeContainer"></div>
     
     <script src="assets/js/index.js"></script>
 </body>
