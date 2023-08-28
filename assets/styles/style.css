@@ -110,6 +110,7 @@ header button:hover {
     padding: 20px;
     text-align: center;
     width: 230px;
+    margin-bottom: 30px;
 }
 
 .imgContainer {
