@@ -39,8 +39,7 @@ const displayPokemonDetails = (pokemonData) => {
             <p>${description}</p>
         </div>
     </div> 
-    `;
-
+    `; 
     detailsContainer.innerHTML = detailsHTML;
 }
 
