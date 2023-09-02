@@ -47,14 +47,17 @@ const createPokemonCard = (poke) => {
 
     const pokemonInnerHTML = `
     <div class="imgContainer">
-        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${poke.id}.png" alt="${name}">
+        <a href="details.html?id=${poke.id}" target="_blank">
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${poke.id}.png" alt="${name}">
+        </a>
     </div>
     <div class="infs">
         <span class="number">#${id}</span>
         <h2 class="name">${name}</h2>
         <p class="type">Type: <span>${type}</span></p>
     </div>
-    `
+    `;
+
 
     card.innerHTML = pokemonInnerHTML
     pokeContainer.appendChild(card)
