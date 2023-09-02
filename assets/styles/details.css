@@ -1,0 +1,103 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Lato', sans-serif;
+}
+
+body {
+    background-color: #222222;
+    color: #eee9d8;
+}
+
+header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #333; 
+    color: white; 
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.title {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+}
+
+.title p {
+    font-size: 12px;
+}
+
+.title a {
+    color: #fff;
+    text-decoration: none;
+}
+
+
+.title a:hover {
+    color: #ccc;
+    text-decoration: underline;
+}
+
+.details_poke {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+}
+
+h2 {
+    text-align: center;
+    margin: 50px 0 20px 0;
+}
+
+.description {
+    display: flex;
+    flex-direction: column;
+
+}
+
+.poke_img {
+    border: 1px solid #eee9d8;
+    border-radius: 10px;
+}
+
+img {
+    width: 120px;
+    height: 120px;
+}
+
+.poke_description {
+    margin-top: 40px;
+    max-width: 600px;
+    flex-wrap: wrap;
+}
+
+@media screen and (max-width: 700px){
+    .details_poke {
+        gap: 20px;
+    }
+
+    .poke_description {
+        padding: 0 30px;
+    }
+}
+
+@media screen and (max-width: 425px){
+    .details_poke {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+}
