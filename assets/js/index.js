@@ -20,9 +20,11 @@ const colors = {
 const mainTypes = Object.keys(colors);
 
 const fetchPokemons = async () => {
+    const pokemonPromises = [];
     for (let i = 1; i <= pokemonsCount; i++) {
-        await getPokemon(i);
+        pokemonPromises.push(getPokemon(i));
     }
+    await Promise.all(pokemonPromises);
 }
 
 const getPokemon = async (id) => {
@@ -44,6 +46,7 @@ const getPokemon = async (id) => {
     }
     createPokemonCard(pokemon);
 }
+
 
 const createPokemonCard = (poke) => {
     const card = document.createElement('div');
