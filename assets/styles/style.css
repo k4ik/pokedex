@@ -73,6 +73,7 @@ header input[type="text"] {
     font-size: 14px; 
     border: 1px solid #ccc; 
     border-radius: 4px; 
+    width: 100%;
 }
 
 header button {
@@ -146,7 +147,7 @@ header button:hover {
     letter-spacing: 1.5px;
 }
 
-@media screen and (max-width: 425px){
+@media screen and (max-width: 500px){
     header {
         flex-direction: column;
     }
@@ -163,4 +164,8 @@ header button:hover {
     .pokemon {
         width: 280px;
     }
+}
+
+@media screen and (max-width: 320px){
+
 }

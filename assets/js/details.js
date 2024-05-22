@@ -7,7 +7,6 @@ const fetchPokemonDetails = async () => {
     const resp = await fetch(url);
     const data = await resp.json();
 
-    // Agora, vamos buscar a descrição do Pokémon usando a PokéAPI v2
     const speciesUrl = data.species.url;
     const speciesResponse = await fetch(speciesUrl);
     const speciesData = await speciesResponse.json();
@@ -37,6 +36,9 @@ const displayPokemonDetails = (pokemonData) => {
         <div class="poke_description">
             <h3>Description</h3>
             <p>${description}</p>
+            <br>
+            <h3>Moves</h3>
+            <p>${moveNames}</p>
         </div>
     </div> 
     `; 
