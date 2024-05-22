@@ -8,8 +8,8 @@
 }
 
 body {
-    background-color: #222222;
-    color: #eee9d8;
+    background: linear-gradient(to right, #d4d3dd, #efefbb);
+    color: #222222;
 }
 
 header {
@@ -69,7 +69,7 @@ h2 {
 }
 
 .poke_img {
-    border: 1px solid #eee9d8;
+    border: 1px solid #222222;
     border-radius: 10px;
 }
 
