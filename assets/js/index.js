@@ -15,7 +15,7 @@ const colors = {
     flying: '#F5F5F5',
     fighting: '#E6E0D4',
     normal: '#F5F5F5'
-}
+};
 
 const mainTypes = Object.keys(colors);
 
@@ -24,8 +24,12 @@ const fetchPokemons = async () => {
     for (let i = 1; i <= pokemonsCount; i++) {
         pokemonPromises.push(getPokemon(i));
     }
-    await Promise.all(pokemonPromises);
-}
+
+    const pokemons = await Promise.all(pokemonPromises);
+
+    pokemons.sort((a, b) => a.id - b.id);
+    pokemons.forEach(pokemon => createPokemonCard(pokemon));
+};
 
 const getPokemon = async (id) => {
     let pokemon = localStorage.getItem(`pokemon-${id}`);
@@ -44,9 +48,8 @@ const getPokemon = async (id) => {
     } else {
         pokemon = JSON.parse(pokemon);
     }
-    createPokemonCard(pokemon);
-}
-
+    return pokemon; 
+};
 
 const createPokemonCard = (poke) => {
     const card = document.createElement('div');
@@ -75,7 +78,7 @@ const createPokemonCard = (poke) => {
 
     card.innerHTML = pokemonInnerHTML;
     pokeContainer.appendChild(card);
-}
+};
 
 const searchInput = document.querySelector('#searchInput');
 const searchButton = document.querySelector('#searchButton');
