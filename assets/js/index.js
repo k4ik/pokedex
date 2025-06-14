@@ -122,7 +122,7 @@ const createPokemonCard = (poke) => {
     const pokemonInnerHTML = `
         <div class="imgContainer">
             <a href="details.html?id=${poke.id}">
-                <img src="${image}"  alt="${name}">
+                <img src="${image}"  alt="${name}" loading="lazy">
             </a>
         </div>
         <div class="infs">
