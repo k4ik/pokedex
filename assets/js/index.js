@@ -83,15 +83,19 @@ const lazyLoadRest = async (startId) => {
 
 const getPokemon = async (id) => {
     let pokemon = localStorage.getItem(`pokemon-${id}`);
+    
     if (!pokemon) {
         const url = `https://pokeapi.co/api/v2/pokemon/${id}`;
         const resp = await fetch(url);
         const data = await resp.json();
+        const image = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${data.id}.png`;
+
 
         pokemon = {
             id: data.id,
             name: data.name,
-            types: data.types.map(typeInfo => typeInfo.type.name)
+            types: data.types.map(typeInfo => typeInfo.type.name),
+            image: image
         };
 
         localStorage.setItem(`pokemon-${id}`, JSON.stringify(pokemon));
@@ -111,12 +115,14 @@ const createPokemonCard = (poke) => {
     const type = mainTypes.find(type => poke.types.indexOf(type) > -1);
     const color = colors[type];
 
+    const image = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${poke.id}.png`;
+
     card.style.backgroundColor = color;
 
     const pokemonInnerHTML = `
         <div class="imgContainer">
             <a href="details.html?id=${poke.id}">
-                <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${poke.id}.png" alt="${name}">
+                <img src="${image}"  alt="${name}">
             </a>
         </div>
         <div class="infs">
