@@ -18,11 +18,7 @@ const fetchPokemonDetails = async () => {
     return;
   }
 
-  const cached = localStorage.getItem(`pokemon-details-${pokemonId}`);
-  if (cached) {
-    displayPokemonDetails(JSON.parse(cached));
-    return;
-  }
+
 
   showLoading();
 
@@ -42,7 +38,6 @@ const fetchPokemonDetails = async () => {
 
     data.description = description;
 
-    localStorage.setItem(`pokemon-details-${pokemonId}`, JSON.stringify(data));
     displayPokemonDetails(data);
   } catch (error) {
     showError(error.message);
