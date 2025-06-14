@@ -1,104 +1,167 @@
-@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap');
 
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Lato', sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Lato', sans-serif;
 }
 
 body {
-    background: linear-gradient(to right, #d4d3dd, #efefbb);
-
-    color: #222222;
+  background: linear-gradient(to right, #d4d3dd, #efefbb);
+  color: #222;
+  line-height: 1.6;
 }
 
 header {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #333; 
-    color: white; 
-    padding: 20px;
-    text-align: center;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #333;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-main {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-.title {
-    display: flex;
-    gap: 5px;
-    align-items: center;
-}
-
-.title p {
-    font-size: 12px;
-}
-
-.title a {
-    color: #fff;
+header a {
+    color: #FFF;
     text-decoration: none;
 }
 
-
-.title a:hover {
+header a:hover {
     color: #ccc;
     text-decoration: underline;
 }
 
-.details_poke {
-    display: flex;
-    justify-content: center;
-    gap: 40px;
+main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem 1rem;
+  width: 100%;
 }
 
 h2 {
-    text-align: center;
-    margin: 50px 0 20px 0;
+  text-align: center;
+  margin: 2rem 0 1rem;
+  font-size: 2rem;
+}
+
+h3 {
+  margin-top: 2rem;
+  margin-bottom: 0.5rem;
+  font-size: 1.2rem;
+  border-bottom: 2px solid #ccc;
+  padding-bottom: 0.3rem;
+}
+
+a.back-link {
+  display: inline-block;
+  margin: 1rem 0;
+  color: #333;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+a.back-link:hover {
+  color: #111;
+  text-decoration: underline;
+}
+
+.detail-card {
+  background: #f9f9f9;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  max-width: 900px;
+  width: 100%;
+}
+
+.details_poke {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+  margin-top: 1.5rem;
 }
 
 .description {
-    display: flex;
-    flex-direction: column;
-
+  display: flex;
+  flex-direction: column;
+  flex: 2;
+  min-width: 250px;
 }
 
 .poke_img {
-    border: 1px solid #222222;
-    border-radius: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  justify-content: center;
 }
 
-img {
-    width: 120px;
-    height: 120px;
+.poke_img img {
+  width: 120px;
+  height: 120px;
+  border-radius: 10px;
+  object-fit: contain;
+  transition: transform 0.2s ease;
+}
+
+.poke_img img:hover {
+  transform: scale(1.05);
 }
 
 .poke_description {
-    margin: 40px 0;
-    max-width: 600px;
-    flex-wrap: wrap;
+  margin-top: 2rem;
+  max-width: 650px;
+  width: 100%;
 }
 
-@media screen and (max-width: 700px){
-    .details_poke {
-        gap: 20px;
-    }
-
-    .poke_description {
-        padding: 0 30px;
-    }
+.stats {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 }
 
-@media screen and (max-width: 425px){
-    .details_poke {
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-    }
+.moves-list {
+  margin-top: 1rem;
+  max-height: 300px;
+  overflow-y: auto;
+  padding-left: 1.2rem;
+  border-left: 3px solid #ccc;
+}
+
+.moves-list li {
+  margin-bottom: 0.4rem;
+}
+
+.error {
+  color: red;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 2rem;
+}
+
+@media screen and (max-width: 700px) {
+  .details_poke {
+    gap: 1rem;
+  }
+
+  .poke_description {
+    padding: 0 1rem;
+  }
+
+  .detail-card {
+    padding: 1.5rem;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .details_poke {
+    flex-direction: column;
+    align-items: center;
+  }
 }

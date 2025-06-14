@@ -2,47 +2,100 @@ const detailsContainer = document.getElementById('detailsContainer');
 const params = new URLSearchParams(window.location.search);
 const pokemonId = params.get('id');
 
+const capitalize = str => str.charAt(0).toUpperCase() + str.slice(1);
+
+const showLoading = () => {
+  detailsContainer.innerHTML = '<p>Loading Pokémon details...</p>';
+};
+
+const showError = (msg) => {
+  detailsContainer.innerHTML = `<p class="error">${msg}</p>`;
+};
+
 const fetchPokemonDetails = async () => {
-    const url = `https://pokeapi.co/api/v2/pokemon/${pokemonId}`;
-    const resp = await fetch(url);
+  if (!pokemonId) {
+    showError('No Pokémon ID specified.');
+    return;
+  }
+
+  const cached = localStorage.getItem(`pokemon-details-${pokemonId}`);
+  if (cached) {
+    displayPokemonDetails(JSON.parse(cached));
+    return;
+  }
+
+  showLoading();
+
+  try {
+    const resp = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonId}`);
+    if (!resp.ok) throw new Error('Failed to fetch Pokémon.');
     const data = await resp.json();
 
-    const speciesUrl = data.species.url;
-    const speciesResponse = await fetch(speciesUrl);
-    const speciesData = await speciesResponse.json();
+    const speciesResp = await fetch(data.species.url);
+    if (!speciesResp.ok) throw new Error('Failed to fetch species data.');
+    const speciesData = await speciesResp.json();
 
-    const description = speciesData.flavor_text_entries.find(entry => entry.language.name === 'en').flavor_text;
+    const flavorEntry = speciesData.flavor_text_entries.find(e => e.language.name === 'en');
+    const description = flavorEntry 
+      ? flavorEntry.flavor_text.replace(/[\f\n]/g, ' ') 
+      : 'No description available.';
 
     data.description = description;
+
+    localStorage.setItem(`pokemon-details-${pokemonId}`, JSON.stringify(data));
     displayPokemonDetails(data);
-}
+  } catch (error) {
+    showError(error.message);
+  }
+};
 
-const displayPokemonDetails = (pokemonData) => {
-    const { name, id, types, moves, sprites, description } = pokemonData;
+const displayPokemonDetails = (pokemon) => {
+  const { name, id, types, moves, sprites, description, stats } = pokemon;
+  const typeNames = types.map(t => capitalize(t.type.name)).join(', ');
+  const nameCap = capitalize(name);
 
-    const typeNames = types.map(type => type.type.name).join(', ');
-    const moveNames = moves.map(move => move.move.name).join(', ');
+  const statsHTML = stats.map(stat =>
+    `<p><strong>${capitalize(stat.stat.name)}:</strong> ${stat.base_stat}</p>`
+  ).join('');
 
-    const detailsHTML = `
+  const movesList = `
+    <details>
+      <summary>Show All Moves (${moves.length})</summary>
+      <ul class="moves-list">
+        ${moves.map(move => `<li>${capitalize(move.move.name)}</li>`).join('')}
+      </ul>
+    </details>
+  `;
+
+  const spritesHTML = `
+    <div class="poke_img">
+      <img src="${sprites.front_default}" alt="${nameCap} front">
+      <img src="${sprites.back_default}" alt="${nameCap} back">
+      ${sprites.front_shiny ? `<img src="${sprites.front_shiny}" alt="${nameCap} shiny front">` : ''}
+      ${sprites.back_shiny ? `<img src="${sprites.back_shiny}" alt="${nameCap} shiny back">` : ''}
+    </div>
+  `;
+
+  detailsContainer.innerHTML = `
+    <a href="index.html" class="back-link">← Back to Pokédex</a>
     <div class="detail-card">
-        <h2>${name}</h2>
-        <div class="details_poke">
-            <div class="poke_img"><img src="${sprites.front_default}" alt="${name}"></div>
-            <div class="description">
-                <p><strong>ID:</strong> ${id}</p>
-                <p><strong>Type(s):</strong> ${typeNames}</p>
-            </div>
+      <h2>${nameCap} (#${id.toString().padStart(3, '0')})</h2>
+      ${spritesHTML}
+      <div class="details_poke">
+        <div class="description">
+          <p><strong>Type(s):</strong> ${typeNames}</p>
+          <h3>Description</h3>
+          <p>${description}</p>
         </div>
-        <div class="poke_description">
-            <h3>Description</h3>
-            <p>${description}</p>
-            <br>
-            <h3>Moves</h3>
-            <p>${moveNames}</p>
-        </div>
-    </div> 
-    `; 
-    detailsContainer.innerHTML = detailsHTML;
-}
+      </div>
+      <div class="poke_description">
+        <h3>Base Stats</h3>
+        <div class="stats">${statsHTML}</div>
+        <h3>Moves</h3>
+        ${movesList}
+      </div>
+    </div>
+  `;
+};
 
 fetchPokemonDetails();
